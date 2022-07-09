@@ -12,7 +12,7 @@ public class JoinLeaveEvent extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         Guild guild = event.getGuild();
-        List<TextChannel> channels = guild.getTextChannelsByName("welcome", true);
+        List<TextChannel> channels = guild.getTextChannelsByName("─⊱⁜ʜɪ-ᴀɴᴅ-ʙʏᴇ⁜⊰─", true);
         TextChannel channel = channels.get(0);
         channel.sendMessage("Welcome To " + event.getGuild().getName() + ", " + event.getMember().getUser().getAsMention() + ".").queue();
     }
@@ -20,7 +20,7 @@ public class JoinLeaveEvent extends ListenerAdapter {
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         Guild guild = event.getGuild();
-        List<TextChannel> channels = guild.getTextChannelsByName("sayonara", true);
+        List<TextChannel> channels = guild.getTextChannelsByName("─⊱⁜ʜɪ-ᴀɴᴅ-ʙʏᴇ⁜⊰─", true);
         TextChannel channel = channels.get(0);
         channel.sendMessage(String.format("Bye Bye, **%s**.", event.getUser().getAsTag())).queue();
     }

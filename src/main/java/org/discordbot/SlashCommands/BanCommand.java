@@ -37,7 +37,7 @@ public class BanCommand extends ListenerAdapter {
             } else if ("unban".equals(event.getName())) {
                 try {
                     String id = event.getOptionsByType(OptionType.STRING).get(0).getAsString();
-                    List<Guild.Ban> banList = guild.retrieveBanList().stream().toList();
+                    List<Guild.Ban> banList = guild.retrieveBanList().complete();
                     boolean isInList = false;
                     for (Guild.Ban ban : banList)
                         if (ban.getUser().getId().equals(id)) {

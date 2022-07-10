@@ -20,16 +20,23 @@ public class ServerInfoCommand extends ListenerAdapter {
             int random = ThreadLocalRandom.current().nextInt(getColorList().size()-1);
             Guild guild = event.getGuild();
             assert guild != null;
+            String boostLevel;
+            switch (guild.getBoostTier()){
+                case TIER_1 -> boostLevel = "Level 1 Perk";
+                case TIER_2 -> boostLevel = "Level 2 Perk";
+                case TIER_3 -> boostLevel = "Level 3 Perk";
+                default -> boostLevel = "No Boosts";
+            }
             EmbedBuilder message = new EmbedBuilder();
             message.setColor(Colors.getAestheticColor(random))
                     .setTitle(guild.getName() + "'s Info")
                     .setThumbnail(guild.getIconUrl())
                     .addField("Name: ", guild.getName(), true)
                     .addField("Members: ", guild.getMemberCount() + "", true)
-                    .addField("Channels: ", "Text Channels: " + guild.getTextChannels().size() + "\nVoice Channels" + guild.getVoiceChannels().size(), true)
+                    .addField("Channels: ", "Text Channels: " + guild.getTextChannels().size() + "\nVoice Channels: " + guild.getVoiceChannels().size(), true)
                     .addField("Owner: ", guild.retrieveOwner(true).complete().getUser().getAsMention(), true)
                     .addField("Creation Date: " , guild.getTimeCreated().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)), true)
-                    .addField("Boost Tier: ",guild.getBoostTier().toString(),true)
+                    .addField("Boost Tier: ",boostLevel,true)
                     .setFooter("Requested by " + event.getUser().getAsTag(), event.getUser().getAvatarUrl());
             event.replyEmbeds(message.build()).submit();
 

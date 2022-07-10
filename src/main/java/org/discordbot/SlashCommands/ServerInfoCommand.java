@@ -25,7 +25,7 @@ public class ServerInfoCommand extends ListenerAdapter {
                     .setTitle(guild.getName() + "'s Info")
                     .setThumbnail(guild.getIconUrl())
                     .addField("Name: ", guild.getName(), true)
-                    .addField("Members: ", guild.getMembers().toString(), true)
+                    .addField("Members: ", guild.getMemberCount() + "", true)
                     .addField("Channels: ", "Text Channels: " + guild.getTextChannels().size() + "\nVoice Channels" + guild.getVoiceChannels().size(), true)
                     .addField("Owner: ", guild.retrieveOwner(true).complete().getUser().getAsMention(), true)
                     .addField("Creation Date: " , guild.getTimeCreated().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)), true)

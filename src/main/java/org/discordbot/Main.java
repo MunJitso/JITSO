@@ -27,23 +27,26 @@ public class Main {
         jda.addEventListener(new UserInfoCommand());
         jda.addEventListener(new BanCommand());
         jda.addEventListener(new KickCommand());
+        jda.addEventListener(new ServerInfoCommand());
 
         CommandListUpdateAction commands = jda.updateCommands();
 
         commands.addCommands(
-                Commands.slash("clean","purge all the messages of a channel."),
+                Commands.slash("clean","Purges all the messages of a channel."),
                 Commands.slash("info", "Gets user's info")
-                        .addOption(OptionType.MENTIONABLE,"user","show the specified user's info ")
+                        .addOption(OptionType.MENTIONABLE,"user","Show the specified user's info ")
                         .setDefaultPermissions(DefaultMemberPermissions.ENABLED),
-                Commands.slash("ban", "ban every person.")
-                        .addOption(OptionType.MENTIONABLE, "user", "user to ban", true)
+                Commands.slash("server", "Gets server's info")
+                        .setDefaultPermissions(DefaultMemberPermissions.ENABLED),
+                Commands.slash("ban", "Bans a user.")
+                        .addOption(OptionType.MENTIONABLE, "user", "User to ban", true)
                         .addOption(OptionType.STRING,"reason", "why?", false)
                         .setDefaultPermissions(DefaultMemberPermissions.ENABLED),
-                Commands.slash("kick", "kick every person.")
-                        .addOption(OptionType.MENTIONABLE, "user", "user to kick", true)
-                        .addOption(OptionType.STRING,"reason", "why?", false),
-                Commands.slash("unban", "unban a user from the channel")
-                        .addOption(OptionType.STRING, "id", "user to unban", true)
+                Commands.slash("kick", "Kicks every person.")
+                        .addOption(OptionType.MENTIONABLE, "user", "User to kick", true)
+                        .addOption(OptionType.STRING,"reason", "Why?", false),
+                Commands.slash("unban", "Unbans a user from the channel")
+                        .addOption(OptionType.STRING, "id", "User to unban", true)
                 );
         commands.queue();
     }

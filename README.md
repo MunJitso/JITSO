@@ -1,4 +1,4 @@
-# Jitso (but with Java this time)
+# JITSO
 
 So yeah, I made a discord bot with Java that have some basics functions for now.. but at least is better than the previous one.
 

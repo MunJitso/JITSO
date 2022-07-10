@@ -25,14 +25,14 @@ public class Main {
         jda.addEventListener(new JoinLeaveEvent());
         jda.addEventListener(new CleanCommand());
         jda.addEventListener(new UserInfoCommand());
-        jda.addEventListener(new BanCommand());
-        jda.addEventListener(new KickCommand());
         jda.addEventListener(new ServerInfoCommand());
+        jda.addEventListener(new BanCommand());
+        jda.addEventListener(new UnbanCommand());
+        jda.addEventListener(new KickCommand());
 
         CommandListUpdateAction commands = jda.updateCommands();
 
         commands.addCommands(
-                Commands.slash("clean","Purges all the messages of a channel."),
                 Commands.slash("info", "Gets user's info")
                         .addOption(OptionType.MENTIONABLE,"user","Show the specified user's info ")
                         .setDefaultPermissions(DefaultMemberPermissions.ENABLED),
@@ -46,7 +46,8 @@ public class Main {
                         .addOption(OptionType.MENTIONABLE, "user", "User to kick", true)
                         .addOption(OptionType.STRING,"reason", "Why?", false),
                 Commands.slash("unban", "Unbans a user from the channel")
-                        .addOption(OptionType.STRING, "id", "User to unban", true)
+                        .addOption(OptionType.STRING, "id", "User to unban", true),
+                Commands.slash("clean","Purges all the messages of a channel.")
                 );
         commands.queue();
     }

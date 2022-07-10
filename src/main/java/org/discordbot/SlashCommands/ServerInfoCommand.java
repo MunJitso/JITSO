@@ -4,13 +4,13 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.discordbot.Colors;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static org.discordbot.Colors.getAestheticColor;
 import static org.discordbot.Colors.getColorList;
 
 public class ServerInfoCommand extends ListenerAdapter {
@@ -28,7 +28,7 @@ public class ServerInfoCommand extends ListenerAdapter {
                 default -> boostLevel = "No Boosts";
             }
             EmbedBuilder message = new EmbedBuilder();
-            message.setColor(Colors.getAestheticColor(random))
+            message.setColor(getAestheticColor(random))
                     .setTitle(guild.getName() + "'s Info")
                     .setThumbnail(guild.getIconUrl())
                     .addField("Name: ", guild.getName(), true)

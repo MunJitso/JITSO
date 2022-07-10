@@ -4,6 +4,7 @@ So yeah, I made a discord bot with Java that have some basics functions for now.
 
 ## Commands:
 - /info
+- /server
 - /kick
 - /ban
 - /unban

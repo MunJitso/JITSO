@@ -20,13 +20,12 @@ public class ServerInfoCommand extends ListenerAdapter {
             int random = ThreadLocalRandom.current().nextInt(getColorList().size()-1);
             Guild guild = event.getGuild();
             assert guild != null;
-            String boostLevel;
-            switch (guild.getBoostTier()){
-                case TIER_1 -> boostLevel = "Level 1 Perk";
-                case TIER_2 -> boostLevel = "Level 2 Perk";
-                case TIER_3 -> boostLevel = "Level 3 Perk";
-                default -> boostLevel = "No Boosts";
-            }
+            String boostLevel = switch (guild.getBoostTier()) {
+                case TIER_1 -> "Level 1 Perk";
+                case TIER_2 -> "Level 2 Perk";
+                case TIER_3 -> "Level 3 Perk";
+                default -> "No Boosts";
+            };
             EmbedBuilder message = new EmbedBuilder();
             message.setColor(getAestheticColor(random))
                     .setTitle(guild.getName() + "'s Info")

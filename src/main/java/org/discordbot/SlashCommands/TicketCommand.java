@@ -1,14 +1,13 @@
 package org.discordbot.SlashCommands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,7 +56,10 @@ public class TicketCommand extends ListenerAdapter {
                 EmbedBuilder embedMessage = new EmbedBuilder();
                 embedMessage.setColor(new Color(88, 129, 87))
                             .setDescription("Click The button \"Close\" to close the ticket.");
-                Button.secondary("closeTicket", "Close");
+                Message message = new MessageBuilder()
+                        .append(guild.getPublicRole().getAsMention())
+                        .setActionRows(ActionRow.of(Button.secondary("closeTicket", "Close")))
+                        .build();
             }
         }
         if (event.getComponentId().equals("closeTicket")){

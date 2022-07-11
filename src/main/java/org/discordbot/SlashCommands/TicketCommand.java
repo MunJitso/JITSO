@@ -43,6 +43,7 @@ public class TicketCommand extends ListenerAdapter {
             assert guild != null;
             Member member = guild.getMemberById(user.getId());
             assert member != null;
+            guild.createTextChannel(String.format("ticket-%s", user.getId())).queue();
             TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
             assert channel != null;
             EnumSet<Permission> permissions = EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);

@@ -57,9 +57,9 @@ public class TicketCommand extends ListenerAdapter {
                 embedMessage.setColor(new Color(88, 129, 87))
                             .setDescription("Click The button \"Close\" to close the ticket.");
                 Message message = new MessageBuilder()
-                        .append(guild.getPublicRole().getAsMention())
                         .setActionRows(ActionRow.of(Button.secondary("closeTicket", "Close")))
                         .build();
+                channel.sendMessage(message).queue();
             }
         }
         if (event.getComponentId().equals("closeTicket")){

@@ -54,7 +54,7 @@ public class TicketCommand extends ListenerAdapter {
                         .queue();
                 TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
                 assert channel != null;
-                event.reply("Created, %s").setEphemeral(true).submit();
+                event.reply("Created.").setEphemeral(true).submit();
                 channel.sendMessage(guild.getPublicRole().getAsMention()).queue();
                 EmbedBuilder embedMessage = new EmbedBuilder();
                 embedMessage.setColor(new Color(88, 129, 87))

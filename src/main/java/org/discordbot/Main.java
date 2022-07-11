@@ -29,6 +29,7 @@ public class Main {
         jda.addEventListener(new BanCommand());
         jda.addEventListener(new UnbanCommand());
         jda.addEventListener(new KickCommand());
+        jda.addEventListener(new TicketCommand());
 
         CommandListUpdateAction commands = jda.updateCommands();
 
@@ -47,7 +48,8 @@ public class Main {
                         .addOption(OptionType.STRING,"reason", "Why?", false),
                 Commands.slash("unban", "Unbans a user from the channel")
                         .addOption(OptionType.STRING, "id", "User to unban", true),
-                Commands.slash("clean","Purges all the messages of a channel.")
+                Commands.slash("clean","Purges all the messages of a channel."),
+                Commands.slash("ticket", "setup a ticket system")
                 );
         commands.queue();
     }

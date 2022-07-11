@@ -45,6 +45,7 @@ public class TicketCommand extends ListenerAdapter {
             assert member != null;
             EnumSet<Permission> permissions = EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
             try {
+                TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
                 event.reply("You already opened a ticket.").setEphemeral(true).queue();
             } catch (IndexOutOfBoundsException err){
                 guild.createTextChannel(String.format("ticket-%s", user.getId()))

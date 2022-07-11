@@ -53,7 +53,7 @@ public class TicketCommand extends ListenerAdapter {
                         .addMemberPermissionOverride(user.getIdLong(), permissions, null)
                         .queue();
                 TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
-                event.reply("Created. " + channel.getAsMention()).setEphemeral(true).queue();
+                event.reply(String.format("Created, %s", channel.getAsMention())).setEphemeral(true).submit();
             }
 
         }

@@ -53,9 +53,7 @@ public class TicketCommand extends ListenerAdapter {
                         .addMemberPermissionOverride(user.getIdLong(), permissions, null)
                         .queue();
                 TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
-                assert channel != null;
                 event.reply("Created.").setEphemeral(true).submit();
-                channel.sendMessage(guild.getPublicRole().getAsMention()).queue();
                 EmbedBuilder embedMessage = new EmbedBuilder();
                 embedMessage.setColor(new Color(88, 129, 87))
                             .setDescription("Click The button \"Close\" to close the ticket.");

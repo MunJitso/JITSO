@@ -27,7 +27,7 @@ public class TicketCommand extends ListenerAdapter {
             message.setColor(new Color(88, 129, 87))
                     .setTitle("Open a Ticket!")
                     .setDescription("Click on the button below to create a ticket.")
-                    .setFooter(bot.getUser().getAsTag(),bot.getAvatarUrl());
+                    .setFooter(bot.getUser().getAsTag(), bot.getUser().getAvatarUrl());
             event.replyEmbeds(message.build())
                     .addActionRow(
                             Button.secondary("ticketCreation", "Create Ticket.")
@@ -45,14 +45,14 @@ public class TicketCommand extends ListenerAdapter {
             assert member != null;
             EnumSet<Permission> permissions = EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
             try {
-                TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
-                event.reply("You already opened a ticket.").queue();
+                event.reply("You already opened a ticket.").setEphemeral(true).queue();
             } catch (IndexOutOfBoundsException err){
                 guild.createTextChannel(String.format("ticket-%s", user.getId()))
                         .addPermissionOverride(guild.getPublicRole(), null, permissions)
                         .addMemberPermissionOverride(user.getIdLong(), permissions, null)
                         .queue();
-                event.reply("Created.").setEphemeral(true).queue();
+                TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
+                event.reply("Created. " + channel.getAsMention()).setEphemeral(true).queue();
             }
 
         }

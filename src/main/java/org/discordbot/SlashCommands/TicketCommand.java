@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -43,11 +44,17 @@ public class TicketCommand extends ListenerAdapter {
             Member member = guild.getMemberById(user.getId());
             assert member != null;
             EnumSet<Permission> permissions = EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
-            guild.createTextChannel(String.format("ticket-%s", user.getId()))
-                    .addPermissionOverride(guild.getPublicRole(), null, permissions)
-                    .addMemberPermissionOverride(user.getIdLong(), permissions, null)
-                    .queue();
-            event.reply("Created.").setEphemeral(true).queue();
+            try {
+                TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
+                event.reply("You already opened a ticket.").queue();
+            } catch (IndexOutOfBoundsException err){
+                guild.createTextChannel(String.format("ticket-%s", user.getId()))
+                        .addPermissionOverride(guild.getPublicRole(), null, permissions)
+                        .addMemberPermissionOverride(user.getIdLong(), permissions, null)
+                        .queue();
+                event.reply("Created.").setEphemeral(true).queue();
+            }
+
         }
     }
 }

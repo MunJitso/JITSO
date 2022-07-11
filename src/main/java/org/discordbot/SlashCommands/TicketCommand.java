@@ -45,12 +45,11 @@ public class TicketCommand extends ListenerAdapter {
             EnumSet<Permission> permissions = EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
             TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
             assert channel != null;
+            channel.getManager().putMemberPermissionOverride(user.getIdLong(), permissions, null).complete();
             List<Member> memberList = guild.getMembersWithRoles(guild.getRoleById("814623021134249995"));
-            for (Member value : memberList) {
-                channel.getManager().putMemberPermissionOverride(value.getIdLong(), null, permissions).submit();
+            for (Member normalMember : memberList) {
+                channel.getManager().putMemberPermissionOverride(normalMember.getIdLong(), null, permissions).complete();
             }
-
-            channel.getManager().putMemberPermissionOverride(user.getIdLong(), permissions, null).submit();
             event.reply("Created.").setEphemeral(true).queue();
         }
     }

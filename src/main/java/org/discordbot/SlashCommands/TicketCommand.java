@@ -47,7 +47,7 @@ public class TicketCommand extends ListenerAdapter {
             TextChannel channel = guild.getTextChannelsByName(String.format("ticket-%s", user.getId()), false).get(0);
             assert channel != null;
             EnumSet<Permission> permissions = EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND);
-            channel.getManager().putPermissionOverride(member, null, permissions).submit();
+            channel.getManager().putPermissionOverride(member, null, permissions).complete();
             event.reply("Created.").setEphemeral(true).queue();
         }
     }

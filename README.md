@@ -10,6 +10,7 @@ So yeah, I made a discord bot with Java that have some basics functions for now.
 - /ban
 - /unban
 - /clean
+- /ticket
 
 In addition, it can salutate you when you join, or say bye bye when u leave.. and also no swearing, it just delete the message atm.
 

@@ -1,5 +1,6 @@
 package org.discordbot;
 
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -9,6 +10,8 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import org.discordbot.ServerStats.StatsChannels;
+import org.discordbot.ServerStats.UpdateStatsChannelsEvent;
 import org.discordbot.SlashCommands.*;
 import org.discordbot.eventListeners.AntiSwearingEvent;
 import org.discordbot.eventListeners.JoinLeaveEvent;
@@ -30,6 +33,8 @@ public class Main {
         jda.addEventListener(new UnbanCommand());
         jda.addEventListener(new KickCommand());
         jda.addEventListener(new TicketCommand());
+        jda.addEventListener(new StatsChannels());
+        jda.addEventListener(new UpdateStatsChannelsEvent());
 
         CommandListUpdateAction commands = jda.updateCommands();
 
@@ -49,7 +54,9 @@ public class Main {
                 Commands.slash("unban", "Unbans a user from the channel")
                         .addOption(OptionType.STRING, "id", "User to unban", true),
                 Commands.slash("clean","Purges all the messages of a channel."),
-                Commands.slash("ticket", "setup a ticket system")
+                Commands.slash("ticket", "setup a ticket system"),
+                Commands.slash("stats", "setuping the stats channels")
+                        .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
                 );
         commands.queue();
     }

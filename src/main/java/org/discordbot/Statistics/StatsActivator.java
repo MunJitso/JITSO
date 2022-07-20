@@ -1,4 +1,4 @@
-package org.discordbot.ServerStats;
+package org.discordbot.Statistics;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class StatsChannels extends ListenerAdapter {
+public class StatsActivator extends ListenerAdapter {
     public static VoiceChannel allMembersStats;
     public static VoiceChannel membersStats;
     public static VoiceChannel botsStats;

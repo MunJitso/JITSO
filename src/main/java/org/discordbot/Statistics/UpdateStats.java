@@ -1,4 +1,4 @@
-package org.discordbot.ServerStats;
+package org.discordbot.Statistics;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -6,8 +6,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class UpdateStatsChannelsEvent extends ListenerAdapter{
-
+public class UpdateStats extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         int[] users = {0};
@@ -24,9 +23,9 @@ public class UpdateStatsChannelsEvent extends ListenerAdapter{
             users[0] = user;
             bots[0] = bot;
         });
-        StatsChannels.allMembersStats.getManager().setName("All Members: " + event.getGuild().getMembers().size()).queue();
-        StatsChannels.membersStats.getManager().setName("Members: " + users[0]).queue();
-        StatsChannels.botsStats.getManager().setName("Bots: " + bots[0]).queue();
+        StatsActivator.allMembersStats.getManager().setName("All Members: " + event.getGuild().getMembers().size()).queue();
+        StatsActivator.membersStats.getManager().setName("Members: " + users[0]).queue();
+        StatsActivator.botsStats.getManager().setName("Bots: " + bots[0]).queue();
 
     }
 
@@ -46,8 +45,8 @@ public class UpdateStatsChannelsEvent extends ListenerAdapter{
             users[0] = user;
             bots[0] = bot;
         });
-        StatsChannels.allMembersStats.getManager().setName("All Members: " + event.getGuild().getMembers().size()).queue();
-        StatsChannels.membersStats.getManager().setName("Members: " + users[0]).queue();
-        StatsChannels.botsStats.getManager().setName("Bots: " + bots[0]).queue();
+        StatsActivator.allMembersStats.getManager().setName("All Members: " + event.getGuild().getMembers().size()).queue();
+        StatsActivator.membersStats.getManager().setName("Members: " + users[0]).queue();
+        StatsActivator.botsStats.getManager().setName("Bots: " + bots[0]).queue();
     }
 }

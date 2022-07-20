@@ -10,9 +10,9 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
-import org.discordbot.ServerStats.StatsChannels;
-import org.discordbot.ServerStats.UpdateStatsChannelsEvent;
 import org.discordbot.SlashCommands.*;
+import org.discordbot.Statistics.StatsActivator;
+import org.discordbot.Statistics.UpdateStats;
 import org.discordbot.eventListeners.AntiSwearingEvent;
 import org.discordbot.eventListeners.JoinLeaveEvent;
 
@@ -33,8 +33,8 @@ public class Main {
         jda.addEventListener(new UnbanCommand());
         jda.addEventListener(new KickCommand());
         jda.addEventListener(new TicketCommand());
-        jda.addEventListener(new StatsChannels());
-        jda.addEventListener(new UpdateStatsChannelsEvent());
+        jda.addEventListener(new StatsActivator());
+        jda.addEventListener(new UpdateStats());
 
         CommandListUpdateAction commands = jda.updateCommands();
 

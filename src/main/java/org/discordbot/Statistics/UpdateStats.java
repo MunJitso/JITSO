@@ -45,7 +45,7 @@ public class UpdateStats extends ListenerAdapter {
             users[0] = user;
             bots[0] = bot;
         });
-        StatsActivator.allMembersStats.getManager().setName("All Members: " + event.getGuild().getMembers().size()).queue();
+        StatsActivator.allMembersStats.getManager().setName("Member Count: " + event.getGuild().getMembers().size()).queue();
         StatsActivator.membersStats.getManager().setName("Members: " + users[0]).queue();
         StatsActivator.botsStats.getManager().setName("Bots: " + bots[0]).queue();
     }

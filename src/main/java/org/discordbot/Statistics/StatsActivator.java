@@ -31,7 +31,7 @@ public class StatsActivator extends ListenerAdapter {
                 bots[0] = bot;
             });
             guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue();
-            allMembersStats = guild.getVoiceChannelsByName("All Members: " + guild.getMembers().size(), false).get(0);
+            allMembersStats = guild.getVoiceChannelsByName("Member Count: " + guild.getMembers().size(), false).get(0);
             guild.createVoiceChannel("Members: " + users[0]).queue();
             membersStats = guild.getVoiceChannelsByName("Members: " + users[0], false).get(0);
             guild.createVoiceChannel("Bots: " + bots[0]).queue();

@@ -16,7 +16,7 @@ public class StatsActivator extends ListenerAdapter {
     private VoiceChannel membersStats;
     private VoiceChannel botsStats;
 
-    public void memberCount(Guild guild){
+    private void memberCount(Guild guild){
         users = new int[]{0};
         bots = new int[]{0};
         guild.loadMembers().onSuccess(members -> {
@@ -31,6 +31,11 @@ public class StatsActivator extends ListenerAdapter {
             users[0] = user;
             bots[0] = bot;
         });
+    }
+    private void updatingChannels(Guild guild){
+        allMembersStats.getManager().setName("Member Count: " + guild.getMembers().size()).queue();
+        membersStats.getManager().setName("Members: " + users[0]).queue();
+        botsStats.getManager().setName("Bots: " + bots[0]).queue();
     }
 
     @Override
@@ -51,17 +56,12 @@ public class StatsActivator extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         memberCount(event.getGuild());
-        allMembersStats.getManager().setName("All Members: " + event.getGuild().getMembers().size()).queue();
-        membersStats.getManager().setName("Members: " + users[0]).queue();
-        botsStats.getManager().setName("Bots: " + bots[0]).queue();
-
+        updatingChannels(event.getGuild());
     }
 
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         memberCount(event.getGuild());
-        allMembersStats.getManager().setName("Member Count: " + event.getGuild().getMembers().size()).queue();
-        membersStats.getManager().setName("Members: " + users[0]).queue();
-        botsStats.getManager().setName("Bots: " + bots[0]).queue();
+        updatingChannels(event.getGuild());
     }
 }

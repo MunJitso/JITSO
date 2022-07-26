@@ -9,19 +9,18 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class JoinLeaveEvent extends ListenerAdapter {
-    @Override
-    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
-        Guild guild = event.getGuild();
+    private void sendMessage(Guild guild, String message){
         List<TextChannel> channels = guild.getTextChannelsByName("─⊱⁜ʜɪ-ᴀɴᴅ-ʙʏᴇ⁜⊰─", true);
         TextChannel channel = channels.get(0);
-        channel.sendMessage("Welcome To " + event.getGuild().getName() + ", " + event.getMember().getUser().getAsMention() + ".").queue();
+        channel.sendMessage(message).queue();
+    }
+    @Override
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+        sendMessage(event.getGuild(), "Welcome To " + event.getGuild().getName() + ", " + event.getMember().getUser().getAsMention() + ".");
     }
 
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
-        Guild guild = event.getGuild();
-        List<TextChannel> channels = guild.getTextChannelsByName("─⊱⁜ʜɪ-ᴀɴᴅ-ʙʏᴇ⁜⊰─", true);
-        TextChannel channel = channels.get(0);
-        channel.sendMessage(String.format("Bye Bye, **%s**.", event.getUser().getAsTag())).queue();
+        sendMessage(event.getGuild(), "Bye Bye, **" + event.getUser().getAsTag() + "**.");
     }
 }

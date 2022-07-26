@@ -55,7 +55,6 @@ public class StatsActivator extends ListenerAdapter {
             } catch (IndexOutOfBoundsException err){
                 event.reply(err.getMessage()).queue();
             }
-
         }
     }
     @Override

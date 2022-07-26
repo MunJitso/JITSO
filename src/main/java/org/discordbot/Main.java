@@ -18,7 +18,7 @@ import org.discordbot.eventListeners.JoinLeaveEvent;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        JDA jda = JDABuilder.createDefault(System.getenv().get("TOKEN"))
+        JDA jda = JDABuilder.createDefault("OTk5MzM5Njg1NTc2OTgyNjc5.GHJWB1.yUaPBXI_Qh9LaNRgZS7sdgWjcyYYY5unTJpJhM")
                 .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_BANS, GatewayIntent.GUILD_WEBHOOKS)
                 .setActivity(Activity.playing("MunJitso doesn't suck.")).setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();

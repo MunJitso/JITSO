@@ -44,13 +44,18 @@ public class StatsActivator extends ListenerAdapter {
         assert guild != null;
         if(event.getName().equals("stats")){
             memberCount(guild);
-            guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue();
-            allMembersStats = guild.getVoiceChannelsByName("Member Count: " + guild.getMembers().size(), false).get(0);
-            guild.createVoiceChannel("Members: " + users[0]).queue();
-            membersStats = guild.getVoiceChannelsByName("Members: " + users[0], false).get(0);
-            guild.createVoiceChannel("Bots: " + bots[0]).queue();
-            botsStats = guild.getVoiceChannelsByName("Bots: " + bots[0], false).get(0);
-            event.reply("Done").setEphemeral(true).submit();
+            try{
+                guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue();
+                allMembersStats = guild.getVoiceChannelsByName("Member Count: " + guild.getMembers().size(), false).get(0);
+                guild.createVoiceChannel("Members: " + users[0]).queue();
+                membersStats = guild.getVoiceChannelsByName("Members: " + users[0], false).get(0);
+                guild.createVoiceChannel("Bots: " + bots[0]).queue();
+                botsStats = guild.getVoiceChannelsByName("Bots: " + bots[0], false).get(0);
+                event.reply("Done").setEphemeral(true).queue();
+            } catch (IndexOutOfBoundsException err){
+                event.reply(err.getMessage()).queue();
+            }
+
         }
     }
     @Override

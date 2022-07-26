@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.discordbot.SlashCommands.*;
 import org.discordbot.Statistics.StatsActivator;
-import org.discordbot.Statistics.UpdateStats;
 import org.discordbot.eventListeners.AntiSwearingEvent;
 import org.discordbot.eventListeners.JoinLeaveEvent;
 
@@ -34,7 +33,6 @@ public class Main {
         jda.addEventListener(new KickCommand());
         jda.addEventListener(new TicketCommand());
         jda.addEventListener(new StatsActivator());
-        jda.addEventListener(new UpdateStats());
 
         CommandListUpdateAction commands = jda.updateCommands();
 

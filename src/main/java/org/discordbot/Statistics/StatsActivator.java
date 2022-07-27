@@ -46,7 +46,7 @@ public class StatsActivator extends ListenerAdapter {
                 guild.createVoiceChannel("Members: " + users).queue();
                 guild.createVoiceChannel("Bots: " + bots).queue();
             } else{
-                updatingChannels(guild, "1001655104958631986", "1001655106141437972", "1001655107051602011");
+                updatingChannels(guild, "1001646065449193482", "1001646066497765529", "1001646067533742161");
             }
         });
     }

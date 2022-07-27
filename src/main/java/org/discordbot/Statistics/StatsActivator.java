@@ -10,15 +10,15 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class StatsActivator extends ListenerAdapter {
-    int[] users = {0};
-    int[] bots = {0};
+    int users = 0;
+    int bots = 0;
     private VoiceChannel allMembersStats;
     private VoiceChannel membersStats;
     private VoiceChannel botsStats;
 
     private void memberCount(Guild guild){
-        users = new int[]{0};
-        bots = new int[]{0};
+        users = 0;
+        bots = 0;
         guild.loadMembers().onSuccess(members -> {
             int user = 0;
             int bot = 0;
@@ -28,14 +28,14 @@ public class StatsActivator extends ListenerAdapter {
                 else
                     user++;
             }
-            users[0] = user;
-            bots[0] = bot;
+            users = user;
+            bots = bot;
         });
     }
     private void updatingChannels(Guild guild){
         allMembersStats.getManager().setName("Member Count: " + guild.getMembers().size()).queue();
-        membersStats.getManager().setName("Members: " + users[0]).queue();
-        botsStats.getManager().setName("Bots: " + bots[0]).queue();
+        membersStats.getManager().setName("Members: " + users).queue();
+        botsStats.getManager().setName("Bots: " + bots).queue();
     }
 
     @Override
@@ -47,10 +47,10 @@ public class StatsActivator extends ListenerAdapter {
             try{
                 guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue();
                 allMembersStats = guild.getVoiceChannelsByName("Member Count: " + guild.getMembers().size(), false).get(0);
-                guild.createVoiceChannel("Members: " + users[0]).queue();
-                membersStats = guild.getVoiceChannelsByName("Members: " + users[0], false).get(0);
-                guild.createVoiceChannel("Bots: " + bots[0]).queue();
-                botsStats = guild.getVoiceChannelsByName("Bots: " + bots[0], false).get(0);
+                guild.createVoiceChannel("Members: " + users).queue();
+                membersStats = guild.getVoiceChannelsByName("Members: " + users, false).get(0);
+                guild.createVoiceChannel("Bots: " + bots).queue();
+                botsStats = guild.getVoiceChannelsByName("Bots: " + bots, false).get(0);
                 event.reply("Done").setEphemeral(true).queue();
             } catch (IndexOutOfBoundsException err){
                 event.reply(err.getMessage()).queue();

@@ -9,14 +9,25 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Type;
+
 public class StatsActivator extends ListenerAdapter {
     int users = 0;
     int bots = 0;
-    private VoiceChannel allMembersStats;
-    private VoiceChannel membersStats;
-    private VoiceChannel botsStats;
 
-    private void memberCount(Guild guild){
+    private void updatingChannels(Guild guild,String allMembersID, String membersID, String botsId){
+        VoiceChannel allMembersStats = guild.getVoiceChannelById(allMembersID);
+        VoiceChannel membersStats = guild.getVoiceChannelById(membersID);
+        VoiceChannel botsStats = guild.getVoiceChannelById(botsId);
+        assert allMembersStats != null;
+        assert membersStats != null;
+        assert botsStats != null;
+
+        allMembersStats.getManager().setName("Member Count: " + guild.getMemberCount()).queue();
+        membersStats.getManager().setName("Members: " + users).queue();
+        botsStats.getManager().setName("Bots: " + bots).queue();
+    }
+    private void memberCount(Guild guild, boolean createChannels){
         users = 0;
         bots = 0;
         guild.loadMembers().onSuccess(members -> {
@@ -30,15 +41,14 @@ public class StatsActivator extends ListenerAdapter {
             }
             users = user;
             bots = bot;
-            guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue(); //it works
-            guild.createVoiceChannel("Members: " + users).queue(); //doesnt work
-            guild.createVoiceChannel("Bots: " + bots).queue(); // doesnt work
+            if(createChannels){
+                guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue();
+                guild.createVoiceChannel("Members: " + users).queue();
+                guild.createVoiceChannel("Bots: " + bots).queue();
+            } else{
+                updatingChannels(guild, "1001655104958631986", "1001655106141437972", "1001655107051602011");
+            }
         });
-    }
-    private void updatingChannels(Guild guild){
-        allMembersStats.getManager().setName("Member Count: " + guild.getMembers().size()).queue();
-        membersStats.getManager().setName("Members: " + users).queue();
-        botsStats.getManager().setName("Bots: " + bots).queue();
     }
 
     @Override
@@ -46,23 +56,16 @@ public class StatsActivator extends ListenerAdapter {
         Guild guild = event.getGuild();
         assert guild != null;
         if(event.getName().equals("stats")){
-            memberCount(guild);
-            try{
-                System.out.println("bruh");
-            } catch (IndexOutOfBoundsException err){
-                event.reply(err.getMessage()).queue();
-            }
+            memberCount(guild, false);
         }
     }
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
-        memberCount(event.getGuild());
-        updatingChannels(event.getGuild());
+        memberCount(event.getGuild(), false);
     }
 
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
-        memberCount(event.getGuild());
-        updatingChannels(event.getGuild());
+        memberCount(event.getGuild(), false);
     }
 }

@@ -30,6 +30,9 @@ public class StatsActivator extends ListenerAdapter {
             }
             users = user;
             bots = bot;
+            guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue(); //it works
+            guild.createVoiceChannel("Members: " + users).queue(); //doesnt work
+            guild.createVoiceChannel("Bots: " + bots).queue(); // doesnt work
         });
     }
     private void updatingChannels(Guild guild){
@@ -45,13 +48,7 @@ public class StatsActivator extends ListenerAdapter {
         if(event.getName().equals("stats")){
             memberCount(guild);
             try{
-                guild.createVoiceChannel("All Members: " + guild.getMemberCount()).queue();
-                allMembersStats = guild.getVoiceChannelsByName("Member Count: " + guild.getMembers().size(), false).get(0);
-                guild.createVoiceChannel("Members: " + users).queue();
-                membersStats = guild.getVoiceChannelsByName("Members: " + users, false).get(0);
-                guild.createVoiceChannel("Bots: " + bots).queue();
-                botsStats = guild.getVoiceChannelsByName("Bots: " + bots, false).get(0);
-                event.reply("Done").setEphemeral(true).queue();
+                System.out.println("bruh");
             } catch (IndexOutOfBoundsException err){
                 event.reply(err.getMessage()).queue();
             }

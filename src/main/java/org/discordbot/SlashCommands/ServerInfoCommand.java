@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.concurrent.ThreadLocalRandom;
@@ -34,6 +36,8 @@ public class ServerInfoCommand extends ListenerAdapter {
                 default:
                     boostLevel = "No Boosts";
             }
+            OffsetDateTime date = guild.getTimeCreated();
+            Timestamp timestamp = new Timestamp(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), date.getHour(), date.getMinute(), date.getSecond(), date.getNano());
             EmbedBuilder message = new EmbedBuilder();
             message.setColor(getAestheticColor(random))
                     .setTitle(guild.getName() + "'s Info")
@@ -42,7 +46,7 @@ public class ServerInfoCommand extends ListenerAdapter {
                     .addField("Members: ", guild.getMemberCount() + "", true)
                     .addField("Channels: ", "Text Channels: " + guild.getTextChannels().size() + "\nVoice Channels: " + guild.getVoiceChannels().size(), true)
                     .addField("Owner: ", guild.retrieveOwner(true).complete().getUser().getAsMention(), true)
-                    .addField("Creation Date: " , "<t:" + guild.getTimeCreated().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ":R>", true)
+                    .addField("Creation Date: " , "<t:" + timestamp + ":R>", true)
                     .addField("Boost Tier: ",boostLevel,true)
                     .setFooter("Requested by " + event.getUser().getAsTag(), event.getUser().getAvatarUrl());
             event.replyEmbeds(message.build()).submit();

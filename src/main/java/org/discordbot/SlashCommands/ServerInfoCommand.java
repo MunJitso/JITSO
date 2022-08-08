@@ -42,7 +42,7 @@ public class ServerInfoCommand extends ListenerAdapter {
                     .addField("Members: ", guild.getMemberCount() + "", true)
                     .addField("Channels: ", "Text Channels: " + guild.getTextChannels().size() + "\nVoice Channels: " + guild.getVoiceChannels().size(), true)
                     .addField("Owner: ", guild.retrieveOwner(true).complete().getUser().getAsMention(), true)
-                    .addField("Creation Date: " , guild.getTimeCreated().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)), true)
+                    .addField("Creation Date: " , "<t:" + guild.getTimeCreated().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ":R>", true)
                     .addField("Boost Tier: ",boostLevel,true)
                     .setFooter("Requested by " + event.getUser().getAsTag(), event.getUser().getAvatarUrl());
             event.replyEmbeds(message.build()).submit();

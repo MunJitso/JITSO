@@ -9,8 +9,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Type;
-
 public class StatsActivator extends ListenerAdapter {
     int users = 0;
     int bots = 0;

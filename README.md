@@ -1,6 +1,7 @@
-# JITSO
+<img align="center" src="./Screenshot 2022-08-24 211213.png" alt="Jitso.png"/>
+<h1 align="center">JITSO</h1>
 
-So yeah, I made a discord bot with Java that have some basics functions for now.. but at least is better than the previous one.
+<p align="center">So yeah, I made a discord bot with Java that have some basics functions for now.. but at least is better than the previous one.</p>
 
 ## Commands:
 * /info
